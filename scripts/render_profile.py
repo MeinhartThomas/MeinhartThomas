@@ -56,8 +56,11 @@ def render(user, repos, today):
             attrs += f' font-weight="{weight}"'
         chunks.append(f'    <text {attrs}>{escape(str(value))}</text>')
 
+    # Match the portrait sampling grid to the character-cell aspect ratio.
+    # Center its 353 x 363px footprint vertically rather than stretching it.
+    portrait_top = (600 - len(portrait) * 11) / 2
     for i, row in enumerate(portrait):
-        chunks.append(f'    <text x="30" y="{56 + i * 13}" font-size="12.5" letter-spacing="0" xml:space="preserve" fill="#b8c2cc">{escape(row)}</text>')
+        chunks.append(f'    <text x="24" y="{portrait_top + 9 + i * 11:g}" font-size="10.5" textLength="{len(row) * 6.3:g}" lengthAdjust="spacingAndGlyphs" xml:space="preserve" fill="#b8c2cc">{escape(row)}</text>')
     # A fixed character grid keeps labels, dotted leaders and values aligned.
     left, right = 405, 1080
 
@@ -72,7 +75,7 @@ def render(user, repos, today):
         value_start = right - len(value) * 8.5 - 12
         if value_start > label_end:
             chunks.append(f'    <path d="M{label_end} {y-4}H{value_start}" stroke="#30363d" stroke-dasharray="1 6" stroke-linecap="round"/>')
-        text(left, y, label, '#c99a77')
+        text(left, y, label, '#58a6ff')
         text(right, y, value, '#a9bfd1', anchor='end')
 
     section(54, 'thomas@github')
@@ -94,8 +97,6 @@ def render(user, repos, today):
     field(475, 'Repositories:', user['public_repos'])
     field(501, 'Stars:', sum(repo.get('stargazers_count', 0) for repo in repos))
     field(527, 'Followers / following:', f"{user['followers']} / {user['following']}")
-    for i, color in enumerate(['#c99a77', '#d7ba7d', '#98b78b', '#8db5ca', '#b8a1c9', '#c9d1d9']):
-        chunks.append(f'    <rect x="{left + i * 20}" y="553" width="20" height="10" fill="{color}"/>')
     text(right, 562, f'updated {today.isoformat()} UTC', '#7d8590', 11, anchor='end')
     chunks.append('  </g>\n</svg>\n')
     (ROOT / 'assets/profile.svg').write_text('\n'.join(chunks))

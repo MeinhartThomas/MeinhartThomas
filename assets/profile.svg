@@ -79,7 +79,7 @@
     <path d="M599.5 440H1080" stroke="#30363d"/>
     <path d="M525.5 471H1059.5" stroke="#30363d" stroke-dasharray="1 6" stroke-linecap="round"/>
     <text x="405" y="475" fill="#c99a77" font-size="14">Repositories:</text>
-    <text x="1080" y="475" fill="#a9bfd1" font-size="14" text-anchor="end">3</text>
+    <text x="1080" y="475" fill="#a9bfd1" font-size="14" text-anchor="end">4</text>
     <path d="M466.0 497H1059.5" stroke="#30363d" stroke-dasharray="1 6" stroke-linecap="round"/>
     <text x="405" y="501" fill="#c99a77" font-size="14">Stars:</text>
     <text x="1080" y="501" fill="#a9bfd1" font-size="14" text-anchor="end">2</text>
